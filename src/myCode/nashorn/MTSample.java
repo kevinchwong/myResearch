@@ -152,7 +152,14 @@ public class MTSample {
 		scripts.add("'Object '+i+', Rule 3 : '+ccList.get(i).name;");
 		scripts.add("'Object '+i+', Rule 4 : '+(ccList.get(i).amt>2000.0);");
 		scripts.add("'Object '+i+', Rule 5 : '+preCompiledCode(i);");
-				
+		scripts.add(""
+			+ "var input={"
+			+ "\"object\":i,"
+			+ "\"rule\":6,"
+			+ "\"firstName\":\"Kevin\""
+			+ "}
+			+ "\"Object \"+input.object+\", Rule \"+input.rule+\" : passed!\";");
+
 		int M = scripts.size();
 
 		ExecutorService executor = Executors.newFixedThreadPool(P);

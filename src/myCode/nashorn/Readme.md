@@ -22,11 +22,24 @@ By Kevin Wong [@kevinwongprovenir](https://github.com/kevinwongprovenir)
 - Precompile the javascript which is repeatedly used.
 
 ## 2. Objects bindings in Nashorn
-- The syntax is completely different in Rhino and Nashorn.
-- Before ScriptEngine executes eval(), we need to setup the BINDINGS mapping of this Script Engine. Basically, this mapping is just a hashmap where "JS variable names" as key and "Java object references" as value.
+There are 3 ways to passing Java object values to javascript:
+### A. Use Bindings mapping 
+Before ScriptEngine executes eval(), we need to setup the BINDINGS mapping of this Script Engine. Basically, this mapping is just a hashmap where "JS variable names" as key and "Java object references" as value.
 
-- If we use invokeFunction() instead of eval(), we don't need BINDINGS mapping. However, we *MUST* define the "function signature" in the javascript and pass the object instance as parameters.
+### B. Use invokeFunction() and define "javascript function signature"
+If we use invokeFunction() instead of eval(), we don't need BINDINGS mapping. However, we *MUST* define the "function signature" in the javascript and pass the object instance as parameters.
 
+### C. Embed the Java object as JSON in the javascript
+Just define a new local var inside the javascript.
+```javascript
+	scripts.add(""
+	+ "var input={"
+	+ "\"object\":i,"
+	+ "\"rule\":6,"
+	+ "\"firstName\":\"Kevin\""
+	+ "};"
+	+ "\"Object \"+input.object+\", Rule \"+input.rule+\" : passed!\";");
+```
 ## 3. Precompiled javascripts
 - Make sure you have binded all the non-parameter variables to the Script Engine before you call the compile();
 - In our case, we just bind variable "ccList", but we don't bind parameter "i" when we creating the precompiled object. 
@@ -63,12 +76,15 @@ By Kevin Wong [@kevinwongprovenir](https://github.com/kevinwongprovenir)
 - The prefect situation is we have same number of ScriptEngine, threads and processors
 
 ```
-There will be many overhead if we recreate the ScriptEngine whenever a task is started, so we use the following approaches:
+There will be many overhead if we recreate the ScriptEngine whenever a task is started,
+so we use the following approaches:
 
 - Initially, we put P ScriptEngines into a Stack<ScriptEngine>.
+
 - When a thread need a ScriptEngine, just call pop() to get it.
-- When a thread completed its task, just push
-() it back to recycle it.
+
+- When a thread completed its task, just push() it back to recycle it.
+
 ```
 
 ### 5. Use Lambda function and closure scope technique to pass different identifer to each thread.
@@ -82,7 +98,7 @@ There will be many overhead if we recreate the ScriptEngine whenever a task is s
 				public String call() throws Exception {
 					try {
 						ScriptEngine s=ses.pop();
-						s.setBindings(bds.get(i),ScriptContext.ENGINE_SCOPE);													
+						s.setBindings(bds.get(i),ScriptContext.ENGINE_SCOPE);
 						String r=(String) s.eval(scripts.get(j));
 						ses.push(s);
 						return r;

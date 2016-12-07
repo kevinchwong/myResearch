@@ -1,4 +1,4 @@
-# Building a multi-thread Javascript Engine with Nashorn
+# Building a multithreading Javascript Engine with Nashorn
 
 By Kevin Wong [@kevinwongprovenir](https://github.com/kevinwongprovenir)
 
@@ -6,13 +6,13 @@ By Kevin Wong [@kevinwongprovenir](https://github.com/kevinwongprovenir)
 
 - [Nashorn samples (Single-thread Version)](STSample.java)
 
-## 1. Multi-thread doesn't mean faster
+## 1. Multithreading approach doesn't mean faster
 - Overhead in content switching.
 - Time used in setting up the ExecutorService.
-- Since Nashorn ScriptEngine is not thread safety, the best multi-threads strategy is using an individual SctiptEngine for each thread. But If we use more than one ScriptEngines, extra memory and initialization time are needed.
-- In our testing in local laptop, Single Thread verison is 4x faster than multi threads one.
+- Since Nashorn ScriptEngine is not thread safety, the best multithreading strategy is using an individual SctiptEngine for each thread. But If we use more than one ScriptEngines, extra memory and initialization time are needed.
+- In our testing in local laptop, Single Thread verison is 4x faster than multithreading one.
 
-### But why do we still use the mutli-threads algorithm?
+### But why do we still use the multithreading algorithm?
 - We get the partial results earlier.
 - Better performance if we have enough hardware support.
 - Scalability

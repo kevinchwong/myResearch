@@ -1,15 +1,15 @@
-# Building a multi-thread Javascript Engine with Nashron
+# Building a multi-thread Javascript Engine with Nashorn
 
 By Kevin Wong [@kevinwongprovenir](https://github.com/kevinwongprovenir)
 
-- [Nashron samples (Multi-threads Version)](MTSample.java)
+- [Nashorn samples (Multi-threads Version)](MTSample.java)
 
-- [Nashron samples (Single-thread Version)](STSample.java)
+- [Nashorn samples (Single-thread Version)](STSample.java)
 
 ## 1. Multi-thread doesn't mean faster
 - Overhead in content switching.
 - Time used in setting up the ExecutorService.
-- Since Nashron ScriptEngine is not thread safety, the best multi-threads strategy is using an individual SctiptEngine for each thread. But If we use more than one ScriptEngines, extra memory and initialization time are needed.
+- Since Nashorn ScriptEngine is not thread safety, the best multi-threads strategy is using an individual SctiptEngine for each thread. But If we use more than one ScriptEngines, extra memory and initialization time are needed.
 - In our testing in local laptop, Single Thread verison is 4x faster than multi threads one.
 
 ### But why do we still use the mutli-threads algorithm?
@@ -21,9 +21,9 @@ By Kevin Wong [@kevinwongprovenir](https://github.com/kevinwongprovenir)
 - Enable JIT by adding this JVM option: -XX:TieredStopAtLevel=1
 - Precompile the javascript which is repeatedly used.
 
-## 2. Object binding in Nashron
-- The syntax is completely different in Rhino and Nashron.
-- Before ScriptEngine execute eval(script), we need to setup the BINDINGS mapping of this Script Engine. Basically, this mapping is just a hashmap where "JS variable names" as key and "Java object references" as value.
+## 2. Objects bindings in Nashorn
+- The syntax is completely different in Rhino and Nashorn.
+- Before ScriptEngine executes eval(), we need to setup the BINDINGS mapping of this Script Engine. Basically, this mapping is just a hashmap where "JS variable names" as key and "Java object references" as value.
 
 - If we use invokeFunction() instead of eval(), we don't need BINDINGS mapping. However, we *MUST* define the "function signature" in the javascript and pass the object instance as parameters.
 

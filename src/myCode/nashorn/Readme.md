@@ -67,7 +67,8 @@ There will be many overhead if we recreate the ScriptEngine whenever a task is s
 
 - Initially, we put P ScriptEngines into a Stack<ScriptEngine>.
 - When a thread need a ScriptEngine, just call pop() to get it.
-- When a thread completed its task, just push(se) back to recycle it.
+- When a thread completed its task, just push
+() it back to recycle it.
 ```
 
 ### 5. Use Lambda function and closure scope technique to pass different identifer to each thread.
@@ -97,7 +98,7 @@ There will be many overhead if we recreate the ScriptEngine whenever a task is s
 
 
 ### 6. Future and Queue
-- For asynchronized programming, main flow does not keep waiting until one task is completed.
+- For asynchronous programming, main flow does not keep waiting until one task is completed.
 - This mean that after we have initiated several tasks in the executor, the main flow and these tasks are executing concurrently.
 - Future objects associated to the tasks are also changing its state concurrently.
 - Whenever a task is completed, the state of its associated future will become .isDone()--> true immediately.

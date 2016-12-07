@@ -1,4 +1,4 @@
-package myResearch.nashorn;
+package myCode.nashorn;
 
 import java.util.ArrayList;
 import java.util.Date;

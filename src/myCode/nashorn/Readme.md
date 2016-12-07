@@ -1,4 +1,4 @@
-# Notes for building a multi-thread Javascript Engine with Nashron
+# Building a multi-thread Javascript Engine with Nashron
 
 By Kevin Wong [@kevinwongprovenir](https://github.com/kevinwongprovenir)
 
@@ -9,7 +9,7 @@ By Kevin Wong [@kevinwongprovenir](https://github.com/kevinwongprovenir)
 ## 1. Multi-thread doesn't mean faster
 - Overhead in content switching.
 - Time used in setting up the ExecutorService.
-- Since Nashron ScriptEngine is not thread safety, the best multi-threads strategy is using an individual SctiptEngine for each Threads. But If we use more than one ScriptEngines, extra memory and initialization time are needed.
+- Since Nashron ScriptEngine is not thread safety, the best multi-threads strategy is using an individual SctiptEngine for each thread. But If we use more than one ScriptEngines, extra memory and initialization time are needed.
 - In our testing in local laptop, Single Thread verison is 4x faster than multi threads one.
 
 ### But why do we still use the mutli-threads algorithm?
@@ -59,15 +59,19 @@ By Kevin Wong [@kevinwongprovenir](https://github.com/kevinwongprovenir)
 - Please notice that original function name of the javascript is "SayHello(i)", but in the actual eval() call, the name "preCompoliedCode(i)" defined in the Bindings have been used.
 - A compiled script can access the binded global variables defined outside of the function.
 
-### 4. Best Strategy -> # of ScriptEngines equal to # of threads
-There will be many overhead if we recreate the ScriptEngine once each tasks starting, so we use the following approaches.
+### 4. Same number of ScriptEngines and threads
+- The prefect situation is we have same number of ScriptEngine, threads and processors
 
-- Initially, we put P ScriptEngine into a Stack<ScriptEngine>.
+```
+There will be many overhead if we recreate the ScriptEngine whenever a task is started, so we use the following approaches:
+
+- Initially, we put P ScriptEngines into a Stack<ScriptEngine>.
 - When a thread need a ScriptEngine, just call pop() to get it.
 - When a thread completed its task, just push(se) back to recycle it.
+```
 
-### 5. Use Lambda function and closure scope technique to pass different identifer to each threads.
-- Precise identifiers (just a integer ID in this case) are neccessary for each callable tasks (threads) to locate the object which they needed to handle.
+### 5. Use Lambda function and closure scope technique to pass different identifer to each thread.
+- Precise identifiers (just a integer ID in this case) are neccessary for each callable task (threads) to locate the object which they needed to handle.
 - We use IntStream.range(0,N).foreach(i->{...}) to achieve this.
 ```Java
 	IntStream.range(0, M).forEach(j -> {

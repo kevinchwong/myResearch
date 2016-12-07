@@ -1,4 +1,4 @@
-package myResearch.nashorn;
+package myCode.nashorn;
 import java.util.Date;
 
 public class ManagerClass{

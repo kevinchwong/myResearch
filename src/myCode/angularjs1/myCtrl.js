@@ -8,6 +8,5 @@
     		"\tYou type,\n" +
 			"\tI draw,\n" +
 			"\tAnd we share!";
-    	$scope.myDataOut="";
     }]);
 }());

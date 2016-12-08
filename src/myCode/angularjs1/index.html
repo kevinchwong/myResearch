@@ -7,17 +7,19 @@
 <body ng-app="myApp">
 
 	<div ng-controller="myCtrl">
-<!-- 		<my-textarea stat="myStat" ng-model="myDataOut" style="width: 90vw; height: 40vh"> -->
-<!-- 		</my-textarea> -->
-<!-- 		<br> -->
-		<my-textarea stat=myStat ng-model="myDataIn" width="90vw" height="40vh" style="padding:10px;">
-		</my-textarea>
+		<textarea style="width:90vw;height:40vh;padding:10px;">
+		{{myStat.lines}}
+		</textarea>
 		<br>
-		<div style="width: 90vw; height:40vh; word-wrap:break-word; overflow-y: hidden;">{{myStat}}</div>
+		<my-textarea stat="myStat" ng-model="myDataIn" width="90vw" height="40vh" style="padding:10px;"></my-textarea>
+		<br>
+		<div style="width: 90vw; height:10vh; padding:10px; word-wrap:break-word; overflow-y: scroll; border:#00f000 solid 2px">
+		{{myStat}}
+		</div>
 	</div>
 	<script src="angular.min.js"></script>
 	<script src="app.js"></script>
 	<script src="myCtrl.js"></script>
 	<script src="myTextarea.js"></script>
 </body>
-</html>
+</html> 

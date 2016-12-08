@@ -112,7 +112,7 @@ public class MTSample {
 		Utils.timeMe();
 
 		// N objects of 1 Class CustomerClass
-		int N = 1000;
+		int N = 5000;
 		// P Threads
 		int P = 4;
 
@@ -157,7 +157,7 @@ public class MTSample {
 			+ "\"object\":i,"
 			+ "\"rule\":6,"
 			+ "\"firstName\":\"Kevin\""
-			+ "}"
+			+ "};"
 			+ "\"Object \"+input.object+\", Rule \"+input.rule+\" : passed!\";");
 
 		int M = scripts.size();

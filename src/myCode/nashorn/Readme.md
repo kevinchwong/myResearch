@@ -72,7 +72,7 @@ Just define a new local var inside the javascript.
 - Please notice that original function name of the javascript is "SayHello(i)", but in the actual eval() call, the name "preCompoliedCode(i)" defined in the Bindings have been used.
 - A compiled script can access the binded global variables defined outside of the function.
 
-### 4. Same number of ScriptEngines and threads
+## 4. Same number of ScriptEngines and threads
 - The prefect situation is we have same number of ScriptEngine, threads and processors
 
 ```
@@ -87,7 +87,7 @@ so we use the following approaches:
 
 ```
 
-### 5. Use Lambda function and closure scope technique to pass different identifer to each thread.
+## 5. Use Lambda function and closure scope technique to pass different identifer to each thread.
 - Precise identifiers (just a integer ID in this case) are neccessary for each callable task (threads) to locate the object which they needed to handle.
 - We use IntStream.range(0,N).foreach(i->{...}) to achieve this.
 ```Java

@@ -20,15 +20,16 @@
 					var tb=element[0];
 					tb.style["height"] = attrs['height'];
 					tb.style["width"] = attrs['width'];
+					var paddingSize=10;
 
 					var rect=tb.getBoundingClientRect();
-					scope.stat.lineHeight=Math.round(tb.scrollHeight/scope.stat.fontSizeIdx);
+					var textareaInnerHeight=tb.scrollHeight;
+					scope.stat.lineHeight=Math.round((textareaInnerHeight-paddingSize)/scope.stat.fontSizeIdx);
 					scope.stat.fontSize=scope.stat.lineHeight-scope.stat.lineSpace;
 					tb.style["font-size"]=scope.stat.fontSize+"px";
 					tb.style["line-height"]=scope.stat.lineHeight+"px";
 
-					element.on('keydown click', function(e) {
-
+					element.on('keydown', function(e) {
 					    if (e.keyCode == 38 && e.altKey) {
 							e.preventDefault();
 							if(scope.stat.fontSizeIdx>3)
@@ -57,7 +58,9 @@
 									+ "\t" + tb.value.substring(tb.selectionEnd);
 							tb.selectionEnd = s + 1;
 						}
-
+					});
+					
+					element.on('keydown keyup click', function(e) {
 						scope.$apply(function() {
 							scope.stat.getPos = getPos(tb);
 							scope.stat.value = tb.value;
@@ -80,6 +83,10 @@
 							scope.stat.getRow = r;
 						});
 					});
+					scope.$watch('stat.setPos', function(newVal) {
+						if (typeof newVal === 'undefined') return;
+						setPos(tb, newVal);
+					});
 
 					window.onresize = function() {
 						return scope.$apply();
@@ -93,10 +100,6 @@
 						return angular.element(window)[0].innerHeight;
 					}, function() {
 						scope.stat.screenHeight = angular.element(window)[0].innerHeight;
-					});
-					scope.$watch('stat.setPos', function(newVal) {
-						if (typeof newVal === 'undefined') return;
-						setPos(tb, newVal);
 					});
 				}
 			};

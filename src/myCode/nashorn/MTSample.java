@@ -157,7 +157,7 @@ public class MTSample {
 			+ "\"object\":i,"
 			+ "\"rule\":6,"
 			+ "\"firstName\":\"Kevin\""
-			+ "}
+			+ "}"
 			+ "\"Object \"+input.object+\", Rule \"+input.rule+\" : passed!\";");
 
 		int M = scripts.size();

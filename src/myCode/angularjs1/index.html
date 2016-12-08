@@ -1,0 +1,23 @@
+<!doctype html>
+
+<meta charset="utf-8">
+<title>Angular JS 1 R&D</title>
+<meta name="description" content="R and D">
+
+<body ng-app="myApp">
+
+	<div ng-controller="myCtrl">
+<!-- 		<my-textarea stat="myStat" ng-model="myDataOut" style="width: 90vw; height: 40vh"> -->
+<!-- 		</my-textarea> -->
+<!-- 		<br> -->
+		<my-textarea stat=myStat ng-model="myDataIn" width="90vw" height="40vh">
+		</my-textarea>
+		<br>
+		<div style="width: 90vw; height:40vh; word-wrap:break-word; overflow-y: hidden;">{{myStat}}</div>
+	</div>
+	<script src="angular.min.js"></script>
+	<script src="app.js"></script>
+	<script src="myCtrl.js"></script>
+	<script src="myTextarea.js"></script>
+</body>
+</html>

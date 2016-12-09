@@ -1,5 +1,7 @@
 # Use Javascript Engine with Java Reflection
 
+By Kevin Wong [@kevinchwong](https://github.com/kevinchwong)
+
 ## Goal
 - API interface of the Javascript evaluaton engine should be more generic so that many clients can access this without altering the engine.
 

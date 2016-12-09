@@ -57,7 +57,7 @@
 							tb.value = tb.value.substring(0, tb.selectionStart)
 									+ "\t" + tb.value.substring(tb.selectionEnd);
 							tb.selectionEnd = s + 1;
-						}
+						}					    
 					});
 					
 					element.on('keydown keyup click', function(e) {
@@ -66,8 +66,6 @@
 							scope.stat.value = tb.value;
 							scope.stat.scrollHeight = tb.scrollHeight;
 							scope.stat.scrollTop = tb.scrollTop;
-							scope.stat.lines = tb.value.split("\n");
-							scope.stat.maxRow = scope.stat.lines.length;
 							for(var k in rect)
 								scope.stat.textAreaRect[k.toString()]=rect[k.toString()];
 							var c = 0,
@@ -101,10 +99,24 @@
 					}, function() {
 						scope.stat.screenHeight = angular.element(window)[0].innerHeight;
 					});
+					
+					scope.$watch(function(){
+						return element[0].value;
+					}, function(){
+						scope.stat.lines = tb.value.split("\n");
+						scope.stat.maxRow = scope.stat.lines.length;
+					    scope.stat.output=treeConvert(scope);
+					});
+
 				}
 			};
 		});
-
+	
+	function treeConvert(scope){
+		var r=scope.stat.lines;
+		return r;
+	}
+	
 	function getPos(element) {
 		if ('selectionStart' in element) {
 			return element.selectionStart;

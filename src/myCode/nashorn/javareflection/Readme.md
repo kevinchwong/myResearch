@@ -5,11 +5,12 @@ By Kevin Wong [@kevinchwong](https://github.com/kevinchwong)
 [Code](NashornWithReflection.java)
 
 ## Goal
-- API interface of the Javascript evaluaton engine should be more generic so that many clients can access this without altering the engine.
+- API interface of the Javascript evaluaton engine should be more generic so that various clients can access this engine without altering the core.
 
 ## Solution
 - New API interface using List\<Object\> as the input parameters type, this design is more generic than using particular class types.
 - With the new API interface, any number of input are allowed to be loaded to the engine.
+- With our new engine design, clients can just use variable name without specifying the instance prefix in the script. For example: using "firstName" instead of "customer.firstName".
 
 ## Idea
 - We use java reflection to analyze the input instances after they had passed to the engine. Then, we use the Field[] information to fill the object bindings mapping.

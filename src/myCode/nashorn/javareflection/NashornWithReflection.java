@@ -96,9 +96,9 @@ public class NashornWithReflection {
 		for (int i = 0; i < scripts.size(); i++) {
 			se.getBindings(ScriptContext.ENGINE_SCOPE).put("i", i);
 			try {
-				res.add(">> Rule" + i + " : " + se.eval(scripts.get(i)));
+				res.add(">> Rule " + i + " : " + se.eval(scripts.get(i)));
 			} catch (ScriptException e) {
-				res.add(">> Rule" + i + " : " + e.toString());
+				res.add(">> Rule " + i + " : [ERROR] - " + e.toString());
 			}
 		}
 		return res;
@@ -140,14 +140,14 @@ public class NashornWithReflection {
 		engine.printInfo();
 		
 		// M Javascript
-		engine.loadScript("" + "price > 5.0;" + "");
-		engine.loadScript("" + "name;" + "");
-		engine.loadScript("" + "appleOnly;" + "");
-		engine.loadScript("" + "walmartOnly;" + "");
-		engine.loadScript("" + "test();" + "");
-		engine.loadScript("" + "test;" + "");
-		engine.loadScript("" + "_this_.test();" + "");
-		engine.loadScript("" + "_this_.class.static.testSt();" + "");
+		engine.loadScript("(price > 2.5)?\"Expensive\":\"Cheap\";");
+		engine.loadScript("name;");
+		engine.loadScript("appleOnly;");
+		engine.loadScript("walmartOnly;");
+		engine.loadScript("test();");
+		engine.loadScript("test;");
+		engine.loadScript("_this_.test();");
+		engine.loadScript("_this_.class.static.testSt();");
 
 		System.out.println("\nCall with loading Apple ...");
 		Bindings appleBindings = engine.createBindings(Arrays.asList(new Object[]{a}));

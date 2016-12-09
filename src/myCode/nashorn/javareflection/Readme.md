@@ -49,27 +49,35 @@ mapping.
 - 2. Create the bindings by adding the list of object(s)
 ```Java
 		Apple a = new Apple();		
-		Bindings appleBindings = engine.createBindings(Arrays.asList(new Object[]{a}));
+		Walmart w = new Walmart();		
+		Bindings appleWalmartBindings = engine.createBindings(Arrays.asList(new Object[]{a,w}));
 ```
 
 - 3. Load the javascripts:
 ```Java		
-		engine.loadScript("" + "price > 5.0;" + "");
-		engine.loadScript("" + "name;" + "");
-		engine.loadScript("" + "appleOnly;" + "");
-		engine.loadScript("" + "walmartOnly;" + "");
+		engine.loadScript("(price > 2.5)?\"Expensive\":\"Cheap\";");
+		engine.loadScript("name;");
+		engine.loadScript("appleOnly;");
+		engine.loadScript("walmartOnly;");
 ```
 
 - 4. Execute and print the result.
 ```Java
-		List<String> result=engine.execute(appleBindings);
+		List<String> result=engine.execute(appleWalmartBindings);
 		for(String s:result){
 			System.out.println(s);
 		}
 ```
 
+## Results
+```
+>> Rule 0 : Expensive
+>> Rule 1 : WALMART
+>> Rule 2 : Apple Only
+>> Rule 3 : Walmart Only
+```
 ##Java Reflection
-We use the following code to build the generic bindings mapping:
+We use the following code to build the generic bindings mapping with Java Reflection technique:
 ```Java
     public void enhanceBindings(Bindings bd, Object x, String objName) {
 			Field[] fs = x.getClass().getFields();

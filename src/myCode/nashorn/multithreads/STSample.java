@@ -1,4 +1,4 @@
-package myCode.nashorn.multithread;
+package myCode.nashorn.multithreads;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,6 +1,6 @@
 # Building a multithreading Javascript Engine with Nashorn
 
-By Kevin Wong [@kevinwongprovenir](https://github.com/kevinwongprovenir)
+By Kevin Wong [@kevinchwong](https://github.com/kevinchwong)
 
 - [Nashorn samples (Multi-threads Version)](MTSample.java)
 

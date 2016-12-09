@@ -20,7 +20,7 @@ mapping.
 ## Output
 - M messages where each line is the response of the execution of each script. 
 
-## Sample Class we used:
+## Sample classes we used:
 ```Java
 	public static class Apple {
 
@@ -37,18 +37,18 @@ mapping.
 ```
 
 ## Usage
--1. Initiate the Engine:
+- 1. Initiate the Engine:
 ```Java
 		NashornWithReflection engine=new NashornWithReflection();
 ```
 
--2. Create the bindings by adding the list of object(s)
+- 2. Create the bindings by adding the list of object(s)
 ```Java
 		Apple a = new Apple();		
 		Bindings appleBindings = engine.createBindings(Arrays.asList(new Object[]{a}));
 ```
 
--3. Load the javascripts:
+- 3. Load the javascripts:
 ```Java		
 		engine.loadScript("" + "price > 5.0;" + "");
 		engine.loadScript("" + "name;" + "");
@@ -56,7 +56,7 @@ mapping.
 		engine.loadScript("" + "walmartOnly;" + "");
 ```
 
--4. Execute and print the result.
+- 4. Execute and print the result.
 ```Java
 		List<String> result=engine.execute(appleBindings);
 		for(String s:result){

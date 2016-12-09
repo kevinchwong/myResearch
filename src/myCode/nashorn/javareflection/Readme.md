@@ -28,14 +28,14 @@ mapping.
 ```Java
 	public static class Apple {
 
-		public final String appleOnly = "Apple Only";
+		public final String appleOnly = "Valid";
 		public String name = "Apple";
 		public Double price = 3.0;
 	}
 
 	public static class Walmart {
 
-		public final String walmartOnly = "Walmart Only";
+		public final String walmartOnly = "Valid";
 		public String name = "Walmart";
 	}
 ```
@@ -55,10 +55,10 @@ mapping.
 
 - 3. Load the javascripts:
 ```Java		
-		engine.loadScript("(price > 2.5)?\"Expensive\":\"Cheap\";");
-		engine.loadScript("name;");
-		engine.loadScript("appleOnly;");
-		engine.loadScript("walmartOnly;");
+		engine.loadScript("(price > 2.5)?\"EXPENSIVE\":\"CHEAP\";");
+		engine.loadScript("\"name = \\\"\"+name+\"\\\"\";");
+		engine.loadScript("\"appleOnly = \"+appleOnly;");
+		engine.loadScript("\"walmartOnly = \"+walmartOnly;");
 ```
 
 - 4. Execute and print the result.
@@ -71,10 +71,10 @@ mapping.
 
 ## Results
 ```
->> Rule 0 : Expensive
->> Rule 1 : WALMART
->> Rule 2 : Apple Only
->> Rule 3 : Walmart Only
+>> Rule 0 : EXPENSIVE
+>> Rule 1 : name = "WALMART"
+>> Rule 2 : appleOnly = Valid
+>> Rule 3 : walmartOnly = Valid
 ```
 ##Java Reflection
 We use the following code to build the generic bindings mapping with Java Reflection technique:

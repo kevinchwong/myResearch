@@ -33,7 +33,7 @@ public class NashornWithReflection {
 		}
 
 		public String name = "Apple";
-		public final String appleOnly = "Apple Only";
+		public final String appleOnly = "Valid";
 		public Double price = 5.0;
 	}
 
@@ -47,7 +47,7 @@ public class NashornWithReflection {
 			return ("_this_.testSt() in Walmart is called!");
 		}
 
-		public final String walmartOnly = "Walmart Only";
+		public final String walmartOnly = "Valid";
 		public String name = "Walmart";
 
 	}
@@ -140,10 +140,10 @@ public class NashornWithReflection {
 		engine.printInfo();
 		
 		// M Javascript
-		engine.loadScript("(price > 2.5)?\"Expensive\":\"Cheap\";");
-		engine.loadScript("name;");
-		engine.loadScript("appleOnly;");
-		engine.loadScript("walmartOnly;");
+		engine.loadScript("(price > 2.5)?\"EXPENSIVE\":\"CHEAP\";");
+		engine.loadScript("\"name = \\\"\"+name+\"\\\"\";");
+		engine.loadScript("\"appleOnly = \"+appleOnly;");
+		engine.loadScript("\"walmartOnly = \"+walmartOnly;");
 		engine.loadScript("test();");
 		engine.loadScript("test;");
 		engine.loadScript("_this_.test();");

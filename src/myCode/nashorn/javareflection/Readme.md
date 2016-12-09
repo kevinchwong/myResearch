@@ -8,14 +8,11 @@ By Kevin Wong [@kevinchwong](https://github.com/kevinchwong)
 - API interface of the Javascript evaluaton engine should be more generic so that many clients can access this without altering the engine.
 
 ## Solution
-- Using List\<Object\> as the input parameters type is much better than using
-a particular class type.
+- New API interface using List\<Object\> as the input parameters type, this design is more generic than using particular class types.
+- With the new API interface, any number of input are allowed to be loaded to the engine.
 
 ## Idea
-- We use java reflection to analyze the input instances after they had passed
-to the engine. 
-Then, we use the Field[] information to fill the object bindings 
-mapping.
+- We use java reflection to analyze the input instances after they had passed to the engine. Then, we use the Field[] information to fill the object bindings mapping.
 
 ## Input
 - M scripts

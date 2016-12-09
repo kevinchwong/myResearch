@@ -1,4 +1,4 @@
-package myCode.nashorn;
+package myCode.nashorn.multithread;
 import java.util.Date;
 
 public class ManagerClass{

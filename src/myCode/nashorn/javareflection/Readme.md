@@ -24,32 +24,15 @@ mapping.
 ```Java
 	public static class Apple {
 
-		public String test() {
-			return ("_this_.test() in Apple is called!");
-		}
-
-		public static String testSt() {
-			return ("_this_.testSt() in Apple is called!");
-		}
-
-		public String name = "Apple";
 		public final String appleOnly = "Apple Only";
-		public Double price = 5.0;
+		public String name = "Apple";
+		public Double price = 3.0;
 	}
 
 	public static class Walmart {
 
-		public String test() {
-			return ("_this_.test() in Walmart is called!");
-		}
-
-		public static String testSt() {
-			return ("_this_.testSt() in Walmart is called!");
-		}
-
 		public final String walmartOnly = "Walmart Only";
 		public String name = "Walmart";
-
 	}
 ```
 
@@ -59,21 +42,18 @@ mapping.
 		NashornWithReflection engine=new NashornWithReflection();
 ```
 
--2. Load the javascripts:
+-2. Create the bindings by adding the list of object(s)
+```Java
+		Apple a = new Apple();		
+		Bindings appleBindings = engine.createBindings(Arrays.asList(new Object[]{a}));
+```
+
+-3. Load the javascripts:
 ```Java		
 		engine.loadScript("" + "price > 5.0;" + "");
 		engine.loadScript("" + "name;" + "");
 		engine.loadScript("" + "appleOnly;" + "");
 		engine.loadScript("" + "walmartOnly;" + "");
-```
-
--3. Create the bindings by adding the list of object(s)
-```Java
-		Apple a = new Apple();
-		a.name = "Apple IIE";
-		a.price = 12.0;
-		
-		Bindings appleBindings = engine.createBindings(Arrays.asList(new Object[]{a}));
 ```
 
 -4. Execute and print the result.

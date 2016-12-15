@@ -4,9 +4,8 @@
   angular.module('myApp.controllers')
     .controller('myCtrl', ['$scope', function($scope){    	
     	$scope.myDataIn
-    	="ShareTree\n" +
-    		"\tYou type,\n" +
-			"\tI draw,\n" +
-			"\tAnd we share!";
+    	="<My-TextArea>\n\n"+
+    		"- Alt-up/down = zoom in/out.\n"+
+    		"- Tab = advance the cursor to the next tab stop."
     }]);
 }());

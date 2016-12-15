@@ -11,24 +11,34 @@
 					stat: '='
 				},
 				link: function(scope, element, attrs) {
-					if (!scope.stat){
-						scope.stat = {};
-						scope.stat.textAreaRect={};
-				    	scope.stat.fontSizeIdx=5;
-				    	scope.stat.lineSpace=6;
-					}
 					var tb=element[0];
 					tb.style["height"] = attrs['height'];
 					tb.style["width"] = attrs['width'];
-					var paddingSize=10;
 
 					var rect=tb.getBoundingClientRect();
 					var textareaInnerHeight=tb.scrollHeight;
+					var paddingSize=10;
+
+					if (!scope.stat){
+						scope.stat = {};
+					}
+
+					scope.stat.textAreaRect={};
+					scope.stat.fontSizeIdx=10;
+					scope.stat.lineSpace=6;
+					scope.stat.getPos = 0;
+					scope.stat.scrollHeight = tb.scrollHeight;
+					scope.stat.scrollTop = tb.scrollTop;
+					scope.stat.getRow = 0;
 					scope.stat.lineHeight=Math.round((textareaInnerHeight-paddingSize)/scope.stat.fontSizeIdx);
 					scope.stat.fontSize=scope.stat.lineHeight-scope.stat.lineSpace;
+					scope.stat.firstRow=Math.round(scope.stat.scrollTop/scope.stat.lineHeight);
 					tb.style["font-size"]=scope.stat.fontSize+"px";
 					tb.style["line-height"]=scope.stat.lineHeight+"px";
+					for(var k in rect)
+						scope.stat.textAreaRect[k.toString()]=rect[k.toString()];
 
+				
 					element.on('keydown', function(e) {
 					    if (e.keyCode == 38 && e.altKey) {
 							e.preventDefault();
@@ -63,9 +73,10 @@
 					element.on('keydown keyup click', function(e) {
 						scope.$apply(function() {
 							scope.stat.getPos = getPos(tb);
-							scope.stat.value = tb.value;
 							scope.stat.scrollHeight = tb.scrollHeight;
 							scope.stat.scrollTop = tb.scrollTop;
+							scope.stat.firstRow=Math.round(scope.stat.scrollTop/scope.stat.lineHeight);
+
 							for(var k in rect)
 								scope.stat.textAreaRect[k.toString()]=rect[k.toString()];
 							var c = 0,
@@ -105,18 +116,11 @@
 					}, function(){
 						scope.stat.lines = tb.value.split("\n");
 						scope.stat.maxRow = scope.stat.lines.length;
-					    scope.stat.output=treeConvert(scope);
 					});
-
 				}
 			};
 		});
-	
-	function treeConvert(scope){
-		var r=scope.stat.lines;
-		return r;
-	}
-	
+		
 	function getPos(element) {
 		if ('selectionStart' in element) {
 			return element.selectionStart;

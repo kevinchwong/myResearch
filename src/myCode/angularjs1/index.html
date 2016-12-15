@@ -7,13 +7,10 @@
 <body ng-app="myApp">
 
 	<div ng-controller="myCtrl">
-		<textarea style="width:90vw;height:40vh;padding:10px;">
-		{{myStat.lines}}
-		</textarea>
-		<br>
+	<h1>My-TextArea</h1>
 		<my-textarea stat="myStat" ng-model="myDataIn" width="90vw" height="40vh" style="padding:10px;"></my-textarea>
 		<br>
-		<div style="width: 90vw; height:10vh; padding:10px; word-wrap:break-word; overflow-y: scroll; border:#00f000 solid 2px">
+		<div style="width: 90vw; height:30vh; padding:10px; word-wrap:break-word; overflow-y: scroll; border:#00f000 solid 2px">
 		{{myStat}}
 		</div>
 	</div>
